@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Header from './components/Header';
+import Login  from './components/Login';
 
 //Remove once "official version" of React is release... (http://www.material-ui.com/#/get-started/installation)
   import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -16,11 +17,7 @@ class App extends Component {
       <MuiThemeProvider>
         <div className="App">
           <Header />
-          <div className="pure-g">
-            <div className="pure-u-1 pure-u-md-1-2"><p>Thirds</p></div>
-            <div className="pure-u-1 pure-u-md-1-4"><p>Thirds</p></div>
-            <div className="pure-u-1 pure-u-md-1-4"><p>Thirds</p></div>
-        </div>
+          <Login />
         </div>
       </MuiThemeProvider>
     );

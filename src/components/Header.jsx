@@ -1,11 +1,17 @@
+// Libs
 import React, { Component } from 'react';
+
+// CSS
 import './Header.css';
+
+// Components
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
-import NavigationMenu from 'material-ui/svg-icons/navigation/menu'
-import TrollIcon from './TrollIcon'
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
+import TrollIcon from './TrollIcon';
+import MenuDrawer from './MenuDrawer';
+
+
 
 class Header extends Component {
   constructor(props){
@@ -14,30 +20,29 @@ class Header extends Component {
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
-  
-  handleClose = () => {
+
+  handleClose = (url) => {
     this.setState({open: false});
-    console.log("handleClose");
+    console.log("handleClose",url);
   }
 
   render() {
     return (
       <div className="Header">
-        <AppBar 
+        <AppBar
           title="PowerTroll"
           style={this.titleStyle}
-          iconElementRight={<IconButton><TrollIcon /></IconButton>}
-          iconElementLeft={<IconButton onTouchTap={this.handleToggle} ><NavigationMenu /></IconButton>}
+          iconElementLeft={<IconButton><TrollIcon /></IconButton>}
+          iconElementRight={<IconButton onTouchTap={this.handleToggle} ><NavigationMenu /></IconButton>}
         />
-        <Drawer
+        <MenuDrawer
           docked={false}
           width={200}
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
-        >
-          <MenuItem onTouchTap={this.handleClose}>Menu Item</MenuItem>
-          <MenuItem onTouchTap={this.handleClose}>Menu Item 2</MenuItem>
-        </Drawer>
+          openSecondary={true}
+          handleClose={(url) => this.handleClose}
+        />
       </div>
     );
   }
