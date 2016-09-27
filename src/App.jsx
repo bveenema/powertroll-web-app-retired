@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import Header from './components/Header';
-import Login  from './components/Login';
+import Header from './components/header/Header';
 
 //Remove once "official version" of React is release... (http://www.material-ui.com/#/get-started/installation)
   import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -13,11 +12,12 @@ import Login  from './components/Login';
 
 class App extends Component {
   render() {
+    let userData = this.props.route.userData;
     return (
       <MuiThemeProvider>
         <div className="App">
-          <Header />
-          <Login />
+          <Header loggedIn={userData.loggedIn}/>
+          {this.props.children}
         </div>
       </MuiThemeProvider>
     );

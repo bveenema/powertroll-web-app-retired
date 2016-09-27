@@ -1,5 +1,6 @@
 // Libs
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 
 // CSS
 import './Header.css';
@@ -8,7 +9,7 @@ import './Header.css';
 import AppBar from 'material-ui/AppBar';
 import IconButton from 'material-ui/IconButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
-import TrollIcon from './TrollIcon';
+import TrollIcon from '../TrollIcon';
 import MenuDrawer from './MenuDrawer';
 
 
@@ -23,7 +24,7 @@ class Header extends Component {
 
   handleClose = (url) => {
     this.setState({open: false});
-    console.log("handleClose",url);
+    browserHistory.push(url)
   }
 
   render() {
@@ -42,6 +43,7 @@ class Header extends Component {
           onRequestChange={(open) => this.setState({open})}
           openSecondary={true}
           handleClick={this.handleClose}
+          loggedIn={this.props.loggedIn}
         />
       </div>
     );

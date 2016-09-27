@@ -23,7 +23,7 @@ const LinkList = {
   "knownUser": [
     {
       text: "Processes",
-      url: "process",
+      url: "processes",
       display: 'all',
       id: "knownUser-1",
     },
