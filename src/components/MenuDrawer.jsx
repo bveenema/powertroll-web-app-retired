@@ -11,7 +11,7 @@ import LinkList from '../data/links'
 const MenuDrawer = (props) => {
   let links = LinkList.knownUser.map((link) => {
     return (
-      <MenuItem onClick={props.handleClose(link.url)} key={link.id}>{link.text}</MenuItem>
+      <MenuItem onClick={() => props.handleClick(link.url)} key={link.id}>{link.text}</MenuItem>
     );
   });
   return (

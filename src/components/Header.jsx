@@ -41,7 +41,7 @@ class Header extends Component {
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
           openSecondary={true}
-          handleClose={(url) => this.handleClose}
+          handleClick={this.handleClose}
         />
       </div>
     );
