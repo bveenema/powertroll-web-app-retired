@@ -2,9 +2,7 @@
 import React from 'react';
 
 // components
-import Chip from 'material-ui/Chip';
-import Avatar from 'material-ui/Avatar';
-import DeviceBattery90 from 'material-ui/svg-icons/device/battery-90';
+import InstantDataChip from './InstantDataChip';
 
 const TopProcess = (props) => {
   let sensors = props.data.sensors;
@@ -21,10 +19,13 @@ const TopProcess = (props) => {
     let mostRecentDataPoint = sensor.data.length - 1;
     let mostRecentData = sensor.data[mostRecentDataPoint].value;
     return(
-      <Chip key={sensor._id}>
-        <Avatar color="#444" icon={<DeviceBattery90 />} />
-        {sensor.name}: {mostRecentData}
-      </Chip>
+      <InstantDataChip
+        name={sensor.name}
+        type={sensor.dataMeta.type}
+        data={mostRecentData}
+        battery={sensor.batteryLevel}
+        key={sensor._id}
+      />
     );
   });
   // Create Setpoint/Action Buttons
