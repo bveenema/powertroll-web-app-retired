@@ -18,8 +18,7 @@ import DeviceBatteryAlert from 'material-ui/svg-icons/device/battery-alert';
 // Style
 const styles = {
   chip: {
-    margin: 4,
-
+    margin: '4px',
   }
 }
 

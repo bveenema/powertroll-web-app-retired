@@ -10,12 +10,9 @@ import userProcesses from '../data/userProcesses';
 class Processes extends Component {
   render() {
     return (
-      <div className="pure-g">
         <div className="pure-u-1">
           <TopProcess data={userProcesses[0]}/>
         </div>
-
-      </div>
     );
   }
 }

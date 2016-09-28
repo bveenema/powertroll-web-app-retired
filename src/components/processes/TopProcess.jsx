@@ -1,25 +1,27 @@
 // Libs
 import React from 'react';
 
-// Components
+// Material-UI Components
+import {Card, CardActions, CardHeader, CardMedia, CardText} from 'material-ui/Card';
+
+// src Components
 import InstantDataChip from './InstantDataChip';
+import ActionButton from './ActionButton';
+import SetPointForm from './SetPointForm';
+
 
 // Styles
 const styles = {
-  instantDatasDiv: {
+  objectRowDiv: {
     display: 'flex',
-  }
+    flexWrap: 'wrap',
+  },
 }
 
 // Component
 const TopProcess = (props) => {
   let sensors = props.data.sensors;
-  let type;
-  if(props.data.meta.type === "setpoint"){
-    type = "Setpoint";
-  }else {
-    type = "fuck off";
-  }
+  let actions = props.data.actions;
   // Create Chart
   // Create Indicator Dots
   // Create Instant Datas
@@ -38,19 +40,37 @@ const TopProcess = (props) => {
     );
   });
   // Create Setpoint/Action Buttons
+  let actionButtons = actions.map((action) => {
+    return(
+      <ActionButton
+        name={action.name}
+        type={action.type}
+        duration={action.duration}
+        while={action.while}
+        disabled={false}
+        key={action._id}
+      />
+    )
+  });
   // Create Device info section
 
   return (
-    <div className="top-process">
-      <h1>{props.data.meta.name}</h1>
-      <h2>Type: {type}</h2>
-      <div className="pure-g">
-        <div className="pure-u-1" style={styles.instantDatasDiv}>
-          {instantDatas}
-        </div>
-      </div>
+    <Card>
+      <CardHeader title={props.data.meta.name} subtitle={props.data.device.name}>
+      </CardHeader>
 
-    </div>
+      <CardMedia>
+      </CardMedia>
+
+      <CardText style={styles.objectRowDiv}>
+        {instantDatas}
+      </CardText>
+
+      <CardActions style={styles.objectRowDiv}>
+        <SetPointForm />
+        {actionButtons}
+      </CardActions>
+    </Card>
   );
 };
 

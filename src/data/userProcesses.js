@@ -1,10 +1,17 @@
 const userProcesses = [
   {
     meta: {
+      _id: 66612345678901234567890,
       name: "Fart Rainbows",
       topProcess: true,
-      type: "setpoint",
       port: 0,
+    },
+    process: {
+      type: "setpoint",
+      value: 65,
+      unit: "F",
+      controlled: 'water',
+      sensorName: "Captain Greybeard",
     },
     device: {
       name: "Swamp Master",
@@ -191,17 +198,20 @@ const userProcesses = [
     actions: [
       {
         _id: 99912345678901234567890123,
-        name: "run motor",
+        name: "Run Motor",
         port: 1,
-        type: "duty",
-        duration: "forever",
+        type: {
+          name: "duty",
+          value: 65,
+        },
+        duration: 0,
         while: {
-          sensorId: 12345678901234561234567890123457,
-          level: false,
+          sensorName: "McSwitchy",
+          level: 0,
           invert: false,
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   {
     meta: {
@@ -397,7 +407,7 @@ const userProcesses = [
         name: "run motor",
         port: 1,
         type: "duty",
-        duration: "forever",
+        duration: 10000,
         while: {
           sensorId: 12345678901234561234567890123457,
           level: false,

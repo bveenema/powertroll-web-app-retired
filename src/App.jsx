@@ -1,13 +1,22 @@
+// Libs
 import React, { Component } from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import Header from './components/header/Header';
 
 //Remove once "official version" of React is release... (http://www.material-ui.com/#/get-started/installation)
   import injectTapEventPlugin from 'react-tap-event-plugin';
   // Needed for onTouchTap
   // http://stackoverflow.com/a/34015469/988941
   injectTapEventPlugin();
+
+// src Components
+import Header from './components/header/Header';
+
+// Styles
+const styles= {
+  pageWrapper: {
+    margin: '10px',
+  }
+}
 
 
 class App extends Component {
@@ -17,7 +26,9 @@ class App extends Component {
       <MuiThemeProvider>
         <div className="App">
           <Header loggedIn={userData.loggedIn}/>
-          {this.props.children}
+            <div className="pure-g" style={styles.pageWrapper}>
+              {this.props.children}
+            </div>
         </div>
       </MuiThemeProvider>
     );
