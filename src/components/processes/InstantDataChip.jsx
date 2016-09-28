@@ -15,13 +15,22 @@ import DeviceBattery30 from 'material-ui/svg-icons/device/battery-30';
 import DeviceBattery20 from 'material-ui/svg-icons/device/battery-20';
 import DeviceBatteryAlert from 'material-ui/svg-icons/device/battery-alert';
 
+// Style
+const styles = {
+  chip: {
+    margin: 4,
+
+  }
+}
+
+// Component
 const InstantDataChip = (props) => {
   // define chip color from prop.type
     let chipColor;
-    if (props.type === "default") {chipColor="rgba(224,224,224,0.87)"}
-    if (props.type === "temperature") {chipColor="rgba(224,0,0,0.87)"}
-    if (props.type === "on/off") {chipColor="rgba(50,50,50,0.87)"}
-    if (props.type === "humidity") {chipColor="rgba(0,0,224,0.87)"}
+    if (props.type === "default") {chipColor="rgba(224,224,224,0.6)"}
+    if (props.type === "temperature") {chipColor="rgba(224,0,0,0.6)"}
+    if (props.type === "boolean") {chipColor="rgba(50,50,50,0.6)"}
+    if (props.type === "humidity") {chipColor="rgba(0,0,224,0.6)"}
 
   // define battery icon from prop.battery
     let batteryIcon;
@@ -34,10 +43,24 @@ const InstantDataChip = (props) => {
     else if (props.battery < 90) {batteryIcon=<DeviceBattery90 />}
     else {batteryIcon=<DeviceBatteryFull />}
 
+  // Change boolean unit chips to ON/OFF, TRUE/FALSE, YES/NO
+    let dataDisplay;
+    if(props.type === "boolean"){
+      let stateStrings = props.unit.split("/");
+      if(props.data === 1){
+        dataDisplay = stateStrings[0].toUpperCase();
+      }else {
+        dataDisplay = stateStrings[1].toUpperCase();
+      }
+
+    } else {
+      dataDisplay = `${props.data} ${props.unit}`;
+    }
+
   return (
-    <Chip className="instant-data-chip" backgroundColor={chipColor}>
+    <Chip style={styles.chip} backgroundColor={chipColor} labelColor="#ffffff">
       <Avatar color="#444" icon={batteryIcon} backgroundColor="#f7f7f7"/>
-      {props.name}: {props.data}
+      {props.name}: {dataDisplay}
     </Chip>
   );
 }
@@ -46,11 +69,13 @@ InstantDataChip.propTypes = {
   name: React.PropTypes.string.isRequired,
   type: React.PropTypes.string,
   data: React.PropTypes.number.isRequired,
+  unit: React.PropTypes.string,
   battery: React.PropTypes.number.isRequired,
 }
 
 InstantDataChip.defaultProps = {
   type: "default",
+  unit: "",
 }
 
 export default InstantDataChip;

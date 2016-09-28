@@ -9,6 +9,7 @@ const userProcesses = [
     device: {
       name: "Swamp Master",
       type: "PowerTroll Ought",
+      connectionStatus: "online",
       _id: 5551234567890124567890123,
     },
     sensors: [
@@ -24,7 +25,7 @@ const userProcesses = [
 				},
         dataMeta: {
           type: "temperature",
-          unit: "farenheit",
+          unit: "F",
         },
         data: [
           {
@@ -76,13 +77,13 @@ const userProcesses = [
 				type: "end stop",
         batteryLevel: 50,
 				location: {
-					description: "Garage",
+					description: "Porch",
 					lat: 41.381494,
 					long: 64.584042
 				},
         dataMeta: {
-          type: "on/off",
-          unit: "boolean",
+          type: "boolean",
+          unit: "on/off",
         },
         data: [
           {
@@ -134,7 +135,7 @@ const userProcesses = [
 				type: "outdoor humidity",
         batteryLevel: 5,
 				location: {
-					description: "Garage",
+					description: "Attic",
 					lat: 41.381494,
 					long: 64.584042
 				},

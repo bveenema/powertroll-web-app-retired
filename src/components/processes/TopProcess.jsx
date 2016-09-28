@@ -1,9 +1,17 @@
 // Libs
 import React from 'react';
 
-// components
+// Components
 import InstantDataChip from './InstantDataChip';
 
+// Styles
+const styles = {
+  instantDatasDiv: {
+    display: 'flex',
+  }
+}
+
+// Component
 const TopProcess = (props) => {
   let sensors = props.data.sensors;
   let type;
@@ -15,7 +23,7 @@ const TopProcess = (props) => {
   // Create Chart
   // Create Indicator Dots
   // Create Instant Datas
-  let instantData = sensors.map((sensor) =>{
+  let instantDatas = sensors.map((sensor) =>{
     let mostRecentDataPoint = sensor.data.length - 1;
     let mostRecentData = sensor.data[mostRecentDataPoint].value;
     return(
@@ -23,6 +31,7 @@ const TopProcess = (props) => {
         name={sensor.name}
         type={sensor.dataMeta.type}
         data={mostRecentData}
+        unit={sensor.dataMeta.unit}
         battery={sensor.batteryLevel}
         key={sensor._id}
       />
@@ -35,7 +44,12 @@ const TopProcess = (props) => {
     <div className="top-process">
       <h1>{props.data.meta.name}</h1>
       <h2>Type: {type}</h2>
-      {instantData}
+      <div className="pure-g">
+        <div className="pure-u-1" style={styles.instantDatasDiv}>
+          {instantDatas}
+        </div>
+      </div>
+
     </div>
   );
 };
