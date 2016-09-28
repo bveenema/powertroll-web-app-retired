@@ -16,11 +16,15 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
   },
+  disableMarginRight: {
+    marginRight: '0px',
+  },
 }
 
 // Component
 const TopProcess = (props) => {
   let sensors = props.data.sensors;
+  let setpoints = props.data.processes;
   let actions = props.data.actions;
   // Create Chart
   // Create Indicator Dots
@@ -40,6 +44,17 @@ const TopProcess = (props) => {
     );
   });
   // Create Setpoint/Action Buttons
+  let setpointForms = setpoints.map((setpoint) => {
+    return(
+      <SetPointForm
+        controlled={setpoint.controlled}
+        value={setpoint.value}
+        unit={setpoint.unit}
+        sensorName={setpoint.sensorName}
+        key={setpoint._id}
+      />
+    )
+  });
   let actionButtons = actions.map((action) => {
     return(
       <ActionButton
@@ -66,9 +81,9 @@ const TopProcess = (props) => {
         {instantDatas}
       </CardText>
 
-      <CardActions style={styles.objectRowDiv}>
-        <SetPointForm />
-        {actionButtons}
+      <CardActions style={styles.objectRowDiv} className="pure-g">
+        <div className="pure-u-1-2" style={styles.disableMarginRight}>{setpointForms}</div>
+        <div className="pure-u-1-2" style={styles.disableMarginRight}>{actionButtons}</div>
       </CardActions>
     </Card>
   );

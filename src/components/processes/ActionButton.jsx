@@ -7,7 +7,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 //styles
 const styles = {
   actionButtonStyles:{
-    height: '60px',
+    height: '100px',
+    width: '100%',
     lineHeight: '18px',
     margin: '4px',
   },
@@ -16,9 +17,12 @@ const styles = {
     padding: '4px',
   },
   actionButtonTextHeader:{
+    fontSize: '1.5em',
     fontWeight: 'bold',
   },
   actionButtonTextSub:{
+    fontSize: '0.7em',
+    lineHeight: '1.2em',
     textIndent: '8px',
     opacity: '0.5',
   }
@@ -28,12 +32,16 @@ const styles = {
 const ActionButton = (props) => {
   // Set type string
   let type = `at ${props.type.value}%`;
+
   // Set duration string
   let duration = `for ${props.duration}ms`
-  // Set while string (ovverides duration)
+  // Set while string
+  let until;
   if(typeof props.while !== 'undefined'){
     let direction = (props.while.invert) ? "under" : "over";
-    duration = `until ${props.while.sensorName} is ${direction} ${props.while.level}`
+    let whileStringA = `until ${props.while.sensorName}`
+    let whileStringB = `is ${direction} ${props.while.level}`;
+    until = <div style={styles.actionButtonTextSub}>{whileStringA}<br />{whileStringB}</div>
   }
 
   return(
@@ -47,6 +55,7 @@ const ActionButton = (props) => {
         <div style={styles.actionButtonTextHeader}>{props.name}</div>
         <div style={styles.actionButtonTextSub}>{type}</div>
         <div style={styles.actionButtonTextSub}>{duration}</div>
+        {until}
       </div>
     </RaisedButton>
   );

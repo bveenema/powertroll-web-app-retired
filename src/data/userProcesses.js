@@ -1,18 +1,20 @@
 const userProcesses = [
   {
     meta: {
-      _id: 66612345678901234567890,
       name: "Fart Rainbows",
       topProcess: true,
       port: 0,
     },
-    process: {
-      type: "setpoint",
-      value: 65,
-      unit: "F",
-      controlled: 'water',
-      sensorName: "Captain Greybeard",
-    },
+    processes: [
+      {
+        _id: 66612345678901234567890,
+        type: "setpoint",
+        value: 65,
+        unit: "F",
+        controlled: 'water',
+        sensorName: "Captain Greybeard",
+      },
+    ],
     device: {
       name: "Swamp Master",
       type: "PowerTroll Ought",
