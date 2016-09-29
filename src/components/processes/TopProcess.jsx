@@ -9,6 +9,10 @@ import InstantDataChip from './InstantDataChip';
 import ActionButton from './ActionButton';
 import SetPointForm from './SetPointForm';
 
+import Chart from '../../d3/Chart';
+
+// Chart data
+import dataPoints from '../../d3/data';
 
 // Styles
 const styles = {
@@ -75,6 +79,9 @@ const TopProcess = (props) => {
       </CardHeader>
 
       <CardMedia>
+        <Chart
+          data={dataPoints}
+        />
       </CardMedia>
 
       <CardText style={styles.objectRowDiv}>
