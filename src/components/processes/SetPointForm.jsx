@@ -27,14 +27,24 @@ const styles = {
     height: '24px',
     width: '24px',
   },
+  formDiv:{
+    display: 'flex',
+    alignItems: 'center',
+  },
+  inputDiv: {
+    position: 'relative',
+  },
+  label : {
+    lineHeight: '24px',
+    position: 'absolute',
+    right: '4px',
+    bottom: '0',
+    opacity: '0.3',
+  },
   input:{
     width: '100%',
     height: '24px',
     boxSizing: 'border-box',
-  },
-  inputDiv:{
-    display: 'flex',
-    alignItems: 'center',
   },
   sensorName: {
     fontSize: '0.75em',
@@ -109,10 +119,16 @@ class SetPointForm extends Component {
           {controlled} Setpoint
         </div>
         <form  onSubmit={this.onSubmit}>
-          <div style={styles.inputDiv} className="pure-g">
+          <div style={styles.formDiv} className="pure-g">
 
-            <div className="pure-u-2-3">
-              <input style={styles.input} type="text" value={this.state.value} onChange={this.onValueChange} onBlur={this.onInputBlur}/>
+            <div className="pure-u-2-3" style={styles.inputDiv}>
+              <input
+                type="text" name="value" id="value" style={styles.input}
+                value={this.state.value}
+                onChange={this.onValueChange}
+                onBlur={this.onInputBlur}
+              />
+              <label style={styles.label} htmlFor="value">{this.props.unit}</label>
             </div>
             <div  style={styles.arrowDiv} className="pure-u-1-3">
               <IconButton style={styles.arrowButton} onClick={this.incrementDown}>
