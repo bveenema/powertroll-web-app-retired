@@ -8,11 +8,10 @@ import {Card, CardActions, CardHeader, CardMedia, CardText} from 'material-ui/Ca
 import InstantDataChip from './InstantDataChip';
 import ActionButton from './ActionButton';
 import SetPointForm from './SetPointForm';
-
-import Chart from '../../d3/Chart';
+import Chart from './Chart';
 
 // Chart data
-import dataPoints from '../../d3/data';
+import dataPoints from '../../data/chartData';
 
 // Styles
 const styles = {
