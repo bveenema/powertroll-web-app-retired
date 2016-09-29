@@ -2,8 +2,6 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 
-// CSS
-import './Header.css';
 
 // Components
 import AppBar from 'material-ui/AppBar';
@@ -29,7 +27,7 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="Header">
+      <div className="Header" style={this.props.style}>
         <AppBar
           title="PowerTroll"
           style={this.titleStyle}

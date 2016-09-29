@@ -17,10 +17,12 @@ import dataPoints from '../../data/chartData';
 const styles = {
   objectRowDiv: {
     display: 'flex',
+    justifyContent: 'space-around',
     flexWrap: 'wrap',
   },
-  disableMarginRight: {
+  actions: {
     marginRight: '0px',
+    maxWidth: '200px',
   },
 }
 
@@ -88,8 +90,8 @@ const TopProcess = (props) => {
       </CardText>
 
       <CardActions style={styles.objectRowDiv} className="pure-g">
-        <div className="pure-u-1-2" style={styles.disableMarginRight}>{setpointForms}</div>
-        <div className="pure-u-1-2" style={styles.disableMarginRight}>{actionButtons}</div>
+        <div className="pure-u-1-2" style={styles.actions}>{setpointForms}</div>
+        <div className="pure-u-1-2" style={styles.actions}>{actionButtons}</div>
       </CardActions>
     </Card>
   );

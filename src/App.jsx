@@ -13,8 +13,19 @@ import Header from './components/header/Header';
 
 // Styles
 const styles= {
+  appWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    minWidth: '300px',
+  },
+  header: {
+    width: '100%',
+  },
   pageWrapper: {
     margin: '10px',
+    maxWidth: '1024px',
+    width: '95%',
   }
 }
 
@@ -24,8 +35,8 @@ class App extends Component {
     let userData = this.props.route.userData;
     return (
       <MuiThemeProvider>
-        <div className="App">
-          <Header loggedIn={userData.loggedIn}/>
+        <div className="App" style={styles.appWrapper}>
+          <Header loggedIn={userData.loggedIn} style={styles.header}/>
             <div className="pure-g" style={styles.pageWrapper}>
               {this.props.children}
             </div>

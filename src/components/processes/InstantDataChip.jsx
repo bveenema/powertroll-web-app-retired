@@ -59,7 +59,7 @@ const InstantDataChip = (props) => {
   return (
     <Chip style={styles.chip} backgroundColor={chipColor} labelColor="#ffffff">
       <Avatar color="#444" icon={batteryIcon} backgroundColor="#f7f7f7"/>
-      {props.name}: {dataDisplay}
+      <span className="pure-hidden-xs">{props.name}: </span>{dataDisplay}
     </Chip>
   );
 }
