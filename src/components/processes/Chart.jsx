@@ -3,12 +3,6 @@ import React, {Component} from 'react';
 import Measure from 'react-measure';
 import ScatterPlotTime from  '../d3/ScatterPlotTime';
 
-const styles = {
-  width   : '100%',
-  height  : 200,
-  padding : 30,
-};
-
 class Chart extends Component {
   constructor(props) {
    super(props);
@@ -25,9 +19,9 @@ class Chart extends Component {
         <div>
           <ScatterPlotTime
             data={this.props.data}
-            height={styles.height}
+            height={this.props.height}
             width={this.state.width}
-            padding={styles.padding} />
+            padding={this.props.padding} />
         </div>
       </Measure>
     );

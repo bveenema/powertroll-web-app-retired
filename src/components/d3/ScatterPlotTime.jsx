@@ -4,6 +4,7 @@ import {scaleLinear, scaleTime, extent, isoParse} from 'd3';
 
 // Components
 import DataCircles  from './DataCircles';
+import DataLine from './DataLine';
 import XYAxis from './XYAxis';
 
 // Returns the largest X coordinate from the data set
@@ -30,7 +31,16 @@ const ScatterPlotTime = (props) => {
   const scales = { xScale: xScale(props), yScale: yScale(props) };
   return (
     <svg width={props.width} height={props.height}>
-      <DataCircles {...props} {...scales} />
+      <DataCircles
+        xScale={scales.xScale}
+        yScale={scales.yScale}
+        data={props.data}
+      />
+      <DataLine
+        xScale={scales.xScale}
+        yScale={scales.yScale}
+        data={props.data}
+      />
       <XYAxis {...props} {...scales} />
     </svg>
   );

@@ -10,9 +10,6 @@ import ActionButton from './ActionButton';
 import SetPointForm from './SetPointForm';
 import Chart from './Chart';
 
-// Chart data
-import dataPoints from '../../data/chartData';
-
 // Styles
 const styles = {
   objectRowDiv: {
@@ -31,8 +28,12 @@ const TopProcess = (props) => {
   let sensors = props.data.sensors;
   let setpoints = props.data.processes;
   let actions = props.data.actions;
-  // Create Chart
-  // Create Indicator Dots
+
+  // Get Data Point Arrays
+  let dataPoints = sensors.map((sensor) => {
+    return sensor.data;
+  });
+
   // Create Instant Datas
   let instantDatas = sensors.map((sensor) =>{
     let mostRecentDataPoint = sensor.data.length - 1;
@@ -81,7 +82,9 @@ const TopProcess = (props) => {
 
       <CardMedia>
         <Chart
-          data={dataPoints}
+          data={dataPoints[0]}
+          height={200}
+          padding={30}
         />
       </CardMedia>
 
