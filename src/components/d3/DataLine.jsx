@@ -1,14 +1,27 @@
 // Libs
 import React from 'react';
+import {line, isoParse, curveMonotoneX, curveStepAfter} from 'd3';
 
 const renderLine = (props) => {
-  const circleProps = {
-    cx: 50,
-    cy: 50,
-    r: 10,
-    key: 7,
+  // Styles
+  const dataLineStyle = {
+    stroke: `rgba(${props.color[0]},${props.color[1]},${props.color[2]},0.8)`,
+    fill: 'none',
+    strokeWidth: '3',
+  };
+
+  const dataLine = line(props.data)
+                    .x(function(d) { return props.xScale(isoParse(d.date)); })
+                    .y(function(d) { return props.yScale(d.value); })
+  if(props.type === 'boolean'){
+    dataLine.curve(curveStepAfter);
+  }else {
+    dataLine.curve(curveMonotoneX);
   }
-  return <circle {...circleProps} />;
+
+
+
+  return <path d={dataLine(props.data)} style={dataLineStyle}/>;
 };
 
 
@@ -25,6 +38,11 @@ DataLine.propTypes = {
     date: React.PropTypes.string.isRequired,
     value: React.PropTypes.number.isRequired,
   })).isRequired,
+  color: React.PropTypes.array,
+}
+
+DataLine.defaultProps = {
+  color: [0,0,0],
 }
 
 export default DataLine;

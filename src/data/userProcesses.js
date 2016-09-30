@@ -35,6 +35,7 @@ const userProcesses = [
         dataMeta: {
           type: "temperature",
           unit: "F",
+          color: [224,0,0]
         },
         data: [
           {
@@ -93,6 +94,7 @@ const userProcesses = [
         dataMeta: {
           type: "boolean",
           unit: "on/off",
+          color: [50,50,50],
         },
         data: [
           {
@@ -151,6 +153,7 @@ const userProcesses = [
         dataMeta: {
           type: "humidity",
           unit: "%RH",
+          color: [0,0,224],
         },
         data: [
           {
@@ -241,6 +244,7 @@ const userProcesses = [
         dataMeta: {
           type: "temperature",
           unit: "farenheit",
+          color: [224,0,0]
         },
         data: [
           {
@@ -299,6 +303,7 @@ const userProcesses = [
         dataMeta: {
           type: "on/off",
           unit: "boolean",
+          color: [50,50,50],
         },
         data: [
           {
@@ -357,6 +362,7 @@ const userProcesses = [
         dataMeta: {
           type: "humidity",
           unit: "%RH",
+          color: [0,0,224],
         },
         data: [
           {

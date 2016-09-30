@@ -1,8 +1,11 @@
 // Libs
 import React from 'react';
+import {pick} from 'lodash';
 
 // Material-UI Components
 import {Card, CardActions, CardHeader, CardMedia, CardText} from 'material-ui/Card';
+import IconButton from 'material-ui/IconButton';
+import NavigationMoreVert from 'material-ui/svg-icons/navigation/more-vert'
 
 // src Components
 import InstantDataChip from './InstantDataChip';
@@ -12,10 +15,20 @@ import Chart from './Chart';
 
 // Styles
 const styles = {
+  header:{
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: '10px 8px',
+  },
+  headerButton: {
+    padding: '4px',
+  },
   objectRowDiv: {
     display: 'flex',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
+    padding: '0 6px',
   },
   actions: {
     marginRight: '0px',
@@ -31,7 +44,7 @@ const TopProcess = (props) => {
 
   // Get Data Point Arrays
   let dataPoints = sensors.map((sensor) => {
-    return sensor.data;
+    return pick(sensor, ['dataMeta','data']);
   });
 
   // Create Instant Datas
@@ -77,12 +90,13 @@ const TopProcess = (props) => {
 
   return (
     <Card>
-      <CardHeader title={props.data.meta.name} subtitle={props.data.device.name}>
+      <CardHeader title={props.data.meta.name} subtitle={props.data.device.name} style={styles.header}>
+        <IconButton style={styles.headerButton}><NavigationMoreVert /></IconButton>
       </CardHeader>
 
       <CardMedia>
         <Chart
-          data={dataPoints[0]}
+          data={dataPoints}
           height={200}
           padding={30}
         />
