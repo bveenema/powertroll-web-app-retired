@@ -18,7 +18,7 @@ const DataLine = (props) => {
   );
 }
 
-DataLines.propTypes = {
+DataLine.propTypes = {
   xScale: React.PropTypes.func.isRequired,
   yScale: React.PropTypes.func.isRequired,
   data: React.PropTypes.arrayOf(React.PropTypes.shape({
