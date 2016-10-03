@@ -143,7 +143,7 @@ class SetPointForm extends Component {
             {this.props.sensorName}
           </div>
           <div style={styles.submit}>
-            <RaisedButton type="submit" style={styles.submitButton} fullWidth={true}>Update</RaisedButton>
+            <RaisedButton primary={true} type="submit" style={styles.submitButton} fullWidth={true}>Update</RaisedButton>
           </div>
         </form>
       </Paper>

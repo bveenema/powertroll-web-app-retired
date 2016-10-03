@@ -21,9 +21,11 @@ const styles= {
   },
   header: {
     width: '100%',
+    position: 'fixed',
+    zIndex: '1',
   },
   pageWrapper: {
-    margin: '10px',
+    margin: '70px 10px 10px 10px',
     maxWidth: '1024px',
     width: '95%',
   }

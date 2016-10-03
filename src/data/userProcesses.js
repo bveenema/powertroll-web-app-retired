@@ -220,30 +220,40 @@ const userProcesses = [
   },
   {
     meta: {
-      processName: "Brew Potion",
-      topProcess: false,
-      type: "setpoint",
+      name: "Fart Rainbows",
+      topProcess: true,
       port: 0,
     },
+    processes: [
+      {
+        _id: 66612345678901234567890,
+        type: "setpoint",
+        value: 65,
+        unit: "F",
+        controlled: 'water',
+        sensorName: "Captain Greybeard",
+      },
+    ],
     device: {
-      name: "Fridge Captain",
+      name: "Swamp Master",
       type: "PowerTroll Ought",
-      _id: 5551234567890124567890124,
+      connectionStatus: "online",
+      _id: 5551234567890124567890123,
     },
     sensors: [
       {
-				_id: 12345678901234561234567890123456,
-				name: "Captain Greybeard",
-				type: "floating thermometer",
+        _id: 12345678901234561234567890123456,
+        name: "Captain Greybeard",
+        type: "floating thermometer",
         batteryLevel: 100,
-				location: {
-					description: "Garage",
-					lat: 41.381494,
-					long: 64.584042
-				},
+        location: {
+          description: "Garage",
+          lat: 41.381494,
+          long: 64.584042
+        },
         dataMeta: {
           type: "temperature",
-          unit: "farenheit",
+          unit: "F",
           color: [224,0,0]
         },
         data: [
@@ -289,20 +299,20 @@ const userProcesses = [
           },
 
         ],
-			},
+      },
       {
-				_id: 12345678901234561234567890123457,
-				name: "McSwitchy",
-				type: "end stop",
+        _id: 22345678901234561234567890123457,
+        name: "McSwitchy",
+        type: "end stop",
         batteryLevel: 50,
-				location: {
-					description: "Garage",
-					lat: 41.381494,
-					long: 64.584042
-				},
+        location: {
+          description: "Porch",
+          lat: 41.381494,
+          long: 64.584042
+        },
         dataMeta: {
-          type: "on/off",
-          unit: "boolean",
+          type: "boolean",
+          unit: "on/off",
           color: [50,50,50],
         },
         data: [
@@ -348,17 +358,17 @@ const userProcesses = [
           },
 
         ],
-			},
+      },
       {
-				_id: 12345678901234561234567890123458,
-				name: "Panama Joe",
-				type: "outdoor humidity",
+        _id: 32345678901234561234567890123458,
+        name: "Panama Joe",
+        type: "outdoor humidity",
         batteryLevel: 5,
-				location: {
-					description: "Garage",
-					lat: 41.381494,
-					long: 64.584042
-				},
+        location: {
+          description: "Attic",
+          lat: 41.381494,
+          long: 64.584042
+        },
         dataMeta: {
           type: "humidity",
           unit: "%RH",
@@ -407,22 +417,25 @@ const userProcesses = [
           },
 
         ],
-			},
+      },
     ],
     actions: [
       {
         _id: 99912345678901234567890123,
-        name: "run motor",
+        name: "Run Motor",
         port: 1,
-        type: "duty",
-        duration: 10000,
+        type: {
+          name: "duty",
+          value: 65,
+        },
+        duration: 0,
         while: {
-          sensorId: 12345678901234561234567890123457,
-          level: false,
+          sensorName: "McSwitchy",
+          level: 0,
           invert: false,
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
 ]
 

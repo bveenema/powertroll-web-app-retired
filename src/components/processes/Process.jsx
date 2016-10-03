@@ -6,6 +6,7 @@ import {pick} from 'lodash';
 import {Card, CardActions, CardHeader, CardMedia, CardText} from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import NavigationMoreVert from 'material-ui/svg-icons/navigation/more-vert'
+import RaisedButton from 'material-ui/RaisedButton';
 
 // src Components
 import InstantDataChip from './InstantDataChip';
@@ -16,10 +17,21 @@ import Chart from './Chart';
 // Styles
 const styles = {
   header:{
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
     padding: '10px 8px',
+  },
+  collapsedHeaderTitle: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    font: '15px Roboto,sans-serif',
+    color: 'rgba(0, 0, 0, 0.870588)',
+    paddingTop: '8px',
+  },
+  collapsedHeaderData: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   headerButton: {
     padding: '4px',
@@ -41,36 +53,22 @@ class Process extends Component {
   constructor(props){
     super(props);
     this.state = {
-      expanded: this.props.initiallyExpanded,
-      hideOnExpand: {
-        display: 'block',
-      }
+      expanded: this.props.initiallyExpanded
     };
     this.handleExpandChange = this.handleExpandChange.bind(this);
   }
 
+
   handleExpandChange = (expanded) => {
     console.log('handleExpandChange');
-    if(expanded){
       this.setState({
         expanded: expanded,
-        hideOnExpand: {
-          display: 'none',
-        },
       });
-    }else{
-      this.setState({
-        expanded: expanded,
-        hideOnExpand: {
-          display: 'block',
-        }
-      });
-    }
   };
 
   handleExpand = () => {
     console.log('handleExpand');
-    this.setState({expanded: true});
+    this.handleExpandChange(true);
   };
 
   handleButton(e) {
@@ -130,10 +128,24 @@ class Process extends Component {
     // Create Device info section
 
     return (
-      <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange}>
+      <Card expanded={this.state.expanded} onExpandChange={this.handleExpandChange} style={this.props.style}>
 
-        <div onTouchTap={this.handleExpand} style={this.state.hideOnExpand} >
-          {instantDatas[0]}{instantDatas[1]}{actionButtons[0]}
+        <div className="unexpanded-header"
+          onTouchTap={this.handleExpand}
+          style={styles.header}
+          hidden={this.state.expanded}>
+          <div style={styles.collapsedHeaderTitle}>
+            {this.props.data.meta.name}
+          </div>
+          <div style={styles.collapsedHeaderData}>
+            {instantDatas[0]}{instantDatas[1]}
+            <RaisedButton
+              backgroundColor="rgba(63,191,63,0.8)"
+              disabledBackgroundColor="rgba(191,65,63,0.2)"
+              >
+              {actions[0].name}
+            </RaisedButton>
+          </div>
         </div>
 
         <CardHeader
@@ -160,8 +172,9 @@ class Process extends Component {
         </CardText>
 
         <CardActions style={styles.objectRowDiv} className="pure-g"
-        expandable={true}>
-          <div className="pure-u-1-2" style={styles.actions}>{setpointForms}</div>
+        expandable={true}
+        >
+          <div className="pure-u-1-2" style={styles.actions}>{setpointForms} </div>
           <div className="pure-u-1-2" style={styles.actions}>{actionButtons}</div>
         </CardActions>
       </Card>

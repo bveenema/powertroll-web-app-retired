@@ -18,8 +18,8 @@ let userData = {
 // Routes
 const routes = (
   <Router history={browserHistory}>
-    <Route component={App} userData={userData}>
-      <Route path="/" component={Login} userData={userData} />
+    <Route path="/"component={App} userData={userData}>
+      <Route path="/login" component={Login} userData={userData} />
       <Route path="/processes" component={Processes} userData={userData} />
       <Route path="*" component={NotFound} />
     </Route>
