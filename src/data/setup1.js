@@ -9,7 +9,7 @@ const setupSettings = {
       _id: 2,
       name: 'Swamp Master',
       type: 'PowerTroll O',
-    }
+    },
     {
       _id: 3,
       name: 'Shop Jockey',
@@ -64,7 +64,8 @@ const setupSettings = {
     {
       name: 'inductive',
       examples: [
-        'example inductive load',
+        'sprinkler valve',
+        'solenoid',
       ],
       enabled: false,
     },
@@ -128,8 +129,10 @@ const setupSettings = {
       examples: [
         'heater',
         'ac motor'
-      ]
+      ],
       enabled: false,
     }
   ],
 }
+
+export default setupSettings;

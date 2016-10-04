@@ -6,6 +6,7 @@ import { Router, Route, browserHistory } from 'react-router';
 import App from './App';
 import Login from './pages/Login';
 import Processes from './pages/Processes';
+import AddProcess from './pages/AddProcess';
 import NotFound from './pages/NotFound';
 
 // Data
@@ -21,6 +22,8 @@ const routes = (
     <Route path="/"component={App} userData={userData}>
       <Route path="/login" component={Login} userData={userData} />
       <Route path="/processes" component={Processes} userData={userData} />
+      <Route path="/add/process" component={AddProcess} />
+      <Route path="/test" component={AddProcess} />
       <Route path="*" component={NotFound} />
     </Route>
   </Router>

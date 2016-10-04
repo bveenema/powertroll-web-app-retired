@@ -22,7 +22,7 @@ const styles= {
   header: {
     width: '100%',
     position: 'fixed',
-    zIndex: '1',
+    zIndex: '5',
   },
   pageWrapper: {
     margin: '70px 10px 10px 10px',
