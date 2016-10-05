@@ -1,5 +1,6 @@
 // Libs
 import React, {Component} from 'react';
+import Measure from 'react-measure';
 
 // Material UI Components
 import Paper from 'material-ui/Paper';
@@ -24,6 +25,15 @@ class AddProcess extends Component {
       stepIndex: 0,
       orientation: 'horizontal',
     };
+    this.onMeasure = this.onMeasure.bind(this);
+  }
+
+  onMeasure(dimensions) {
+    console.log("onMeasure", dimensions)
+
+    this.setState({
+      orientation: (dimensions.width > 650) ? 'horizontal' : 'vertical',
+    });
   }
 
   handleNext = () => {
@@ -81,55 +91,54 @@ class AddProcess extends Component {
   }
 
   render() {
-    const {finished, stepIndex} = this.state;
+    const {finished, stepIndex, orientation} = this.state;
 
     return (
-        <Paper className="pure-u-1" style={{height: '1000px', margin: 'auto'}}>
-          <Stepper activeStep={stepIndex} orientation="vertical">
-            <Step>
-              <StepLabel>General</StepLabel>
-              <StepContent>
-                This is some content you need to render
-                {this.renderStepActions(0)}
-              </StepContent>
-            </Step>
-            <Step>
-              <StepLabel>Create an ad group</StepLabel>
-              <StepContent>
-                <p>An ad group contains one or more ads which target a shared set of keywords.</p>
-                {this.renderStepActions(1)}
-              </StepContent>
-            </Step>
-            <Step>
-              <StepLabel>Create an ad</StepLabel>
-              <StepContent>
-                <p>
-                  Try out different ad text to see what brings in the most customers,
-                  and learn how to enhance your ads using features like ad extensions.
-                  If you run into any problems with your ads, find out how to tell if
-                  they're running and how to resolve approval issues.
-                </p>
-                {this.renderStepActions(2)}
-              </StepContent>
-            </Step>
-          </Stepper>
-          <div style={contentStyle}>
-            <p>{this.getStepContent(stepIndex)}</p>
-            <div style={{marginTop: 12}}>
-              <FlatButton
-                label="Back"
-                disabled={stepIndex === 0}
-                onTouchTap={this.handlePrev}
-                style={{marginRight: 12}}
-              />
-              <RaisedButton
-                label="Next"
-                disabled={stepIndex === 2}
-                primary={true}
-                onTouchTap={this.handleNext}
-              />
+      <Measure onMeasure={this.onMeasure}>
+        <Paper className="pure-u-1">
+          <div  hidden={orientation === 'horizontal'}>
+            <Stepper activeStep={stepIndex} orientation='vertical'>
+              <Step>
+                <StepLabel>General</StepLabel>
+                <StepContent>
+                  {this.getStepContent(stepIndex)}
+                  {this.renderStepActions(stepIndex)}
+                </StepContent>
+              </Step>
+              <Step>
+                <StepLabel>Create an ad group</StepLabel>
+                <StepContent>
+                  {this.getStepContent(stepIndex)}
+                  {this.renderStepActions(stepIndex)}
+                </StepContent>
+              </Step>
+              <Step>
+                <StepLabel>Create an ad</StepLabel>
+                <StepContent>
+                  {this.getStepContent(stepIndex)}
+                  {this.renderStepActions(stepIndex)}
+                </StepContent>
+              </Step>
+            </Stepper>
+          </div>
+          <div  hidden={orientation === 'vertical'}>
+            <Stepper activeStep={stepIndex} orientation='horizontal'>
+              <Step>
+                <StepLabel>General</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>Create an ad group</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>Create an ad</StepLabel>
+              </Step>
+            </Stepper>
+            <div style={{margin: '0 16px'}}>
+              {this.getStepContent(stepIndex)}
+              {this.renderStepActions(stepIndex)}
             </div>
           </div>
+          {orientation}
           {finished && (
             <p style={{margin: '20px 0', textAlign: 'center'}}>
               <a
@@ -144,6 +153,7 @@ class AddProcess extends Component {
             </p>
           )}
         </Paper>
+      </Measure>
     );
   }
 }

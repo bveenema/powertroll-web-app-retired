@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import {find} from 'lodash';
 
 // Material-UI Components
-import Paper from 'material-ui/Paper';
 import Toggle from 'material-ui/Toggle';
 
 // Components
