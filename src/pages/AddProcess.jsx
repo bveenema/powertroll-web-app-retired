@@ -1,5 +1,7 @@
 // Libs
 import React, {Component} from 'react';
+import Measure from 'react-measure';
+import { has } from 'lodash';
 
 // Material UI Components
 import Paper from 'material-ui/Paper';
@@ -7,31 +9,46 @@ import {
   Step,
   Stepper,
   StepLabel,
-  StepContent,
 } from 'material-ui/Stepper';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 
 // Components
 import AddProcess1 from '../components/addProcess/AddProcess1';
+import AddProcess2 from '../components/addProcess/AddProcess2';
 
 
 class AddProcess extends Component {
   constructor(props){
     super(props)
     this.state = {
-      finished: false,
       stepIndex: 0,
-      orientation: 'horizontal',
+      stepCompleted: [false],
+      showLabels: false,
     };
+    this.processInfo = {};
+    this.numSteps = 3;
+    this.onMeasure = this.onMeasure.bind(this);
+    this.handleFinish = this.handleFinish.bind(this);
+    this.handleStepData = this.handleStepData.bind(this);
+    this.checkFormCompleted = this.checkFormCompleted.bind(this);
+  }
+
+  onMeasure(dimensions) {
+    this.setState({
+      showLabels: (dimensions.width > 300) ? true : false,
+    });
   }
 
   handleNext = () => {
     const {stepIndex} = this.state;
-    this.setState({
-      stepIndex: stepIndex + 1,
-      finished: stepIndex >= 2,
-    });
+    if(stepIndex < (this.numSteps - 1)){
+      this.setState({
+        stepIndex: stepIndex + 1
+      });
+    }else{
+      this.handleFinish();
+    }
   };
 
   handlePrev = () => {
@@ -41,16 +58,38 @@ class AddProcess extends Component {
     }
   };
 
+  handleFinish() {
+    console.log("Finished!");
+  }
+
+  handleStepData(data) {
+    this.processInfo[data.id] = data.value;
+    console.log('processInfo', this.processInfo);
+    this.checkFormCompleted();
+  }
+
+  checkFormCompleted() {
+    if(this.state.stepIndex === 0){
+      if(this.processInfo.template && this.processInfo.template !== "Custom"){
+        let checkKeys = ['name','device','sensor'];
+        let isComplete = checkKeys.every((key) => has(this.processInfo, key))
+        console.log('complete:',isComplete);
+      }else{
+        let checkKeys = ['device','sensor','loadType','controlType','controlMethod'];
+        let isComplete = checkKeys.every((key) => has(this.processInfo, key))
+        console.log('complete:',isComplete);
+      }
+    }
+  }
+
   getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
-        return (<AddProcess1 />);
+        return (<AddProcess1 onChange={this.handleStepData}/>);
       case 1:
-        return 'What is an ad group anyways?';
-      case 2:
-        return 'This is the bit I really care about!';
+        return (<AddProcess2 />);
       default:
-        return 'You\'re a long way from home sonny jim!';
+        return 'Somethings on Fire! Go Back.. now!!!';
     }
   }
 
@@ -60,7 +99,7 @@ class AddProcess extends Component {
     return (
       <div style={{margin: '12px 0'}}>
         <RaisedButton
-          label={stepIndex === 2 ? 'Finish' : 'Next'}
+          label={stepIndex === (this.numSteps - 1) ? 'Add Process' : 'Next'}
           disableTouchRipple={true}
           disableFocusRipple={true}
           primary={true}
@@ -81,69 +120,28 @@ class AddProcess extends Component {
   }
 
   render() {
-    const {finished, stepIndex} = this.state;
+    const {stepIndex,showLabels} = this.state;
 
     return (
-        <Paper className="pure-u-1" style={{height: '1000px', margin: 'auto'}}>
-          <Stepper activeStep={stepIndex} orientation="vertical">
-            <Step>
-              <StepLabel>General</StepLabel>
-              <StepContent>
-                This is some content you need to render
-                {this.renderStepActions(0)}
-              </StepContent>
-            </Step>
-            <Step>
-              <StepLabel>Create an ad group</StepLabel>
-              <StepContent>
-                <p>An ad group contains one or more ads which target a shared set of keywords.</p>
-                {this.renderStepActions(1)}
-              </StepContent>
-            </Step>
-            <Step>
-              <StepLabel>Create an ad</StepLabel>
-              <StepContent>
-                <p>
-                  Try out different ad text to see what brings in the most customers,
-                  and learn how to enhance your ads using features like ad extensions.
-                  If you run into any problems with your ads, find out how to tell if
-                  they're running and how to resolve approval issues.
-                </p>
-                {this.renderStepActions(2)}
-              </StepContent>
-            </Step>
-          </Stepper>
-          <div style={contentStyle}>
-            <p>{this.getStepContent(stepIndex)}</p>
-            <div style={{marginTop: 12}}>
-              <FlatButton
-                label="Back"
-                disabled={stepIndex === 0}
-                onTouchTap={this.handlePrev}
-                style={{marginRight: 12}}
-              />
-              <RaisedButton
-                label="Next"
-                disabled={stepIndex === 2}
-                primary={true}
-                onTouchTap={this.handleNext}
-              />
+      <Measure onMeasure={this.onMeasure}>
+        <Paper className="pure-u-1">
+            <Stepper activeStep={stepIndex} orientation='horizontal'>
+              <Step>
+                <StepLabel>{showLabels && ('Setup')}</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>{showLabels && ('Settings')}</StepLabel>
+              </Step>
+              <Step>
+                <StepLabel>{showLabels && ('Review')}</StepLabel>
+              </Step>
+            </Stepper>
+            <div style={{margin: '0 16px'}}>
+              {this.getStepContent(stepIndex)}
+              {this.renderStepActions(stepIndex)}
             </div>
-          </div>
-          {finished && (
-            <p style={{margin: '20px 0', textAlign: 'center'}}>
-              <a
-                href="#"
-                onClick={(event) => {
-                  event.preventDefault();
-                  this.setState({stepIndex: 0, finished: false});
-                }}
-              >
-                Click here
-              </a> to reset the example.
-            </p>
-          )}
         </Paper>
+      </Measure>
     );
   }
 }

@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 import {find} from 'lodash';
 
 // Material-UI Components
-import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
 import Toggle from 'material-ui/Toggle';
 
 // Components
 import SelectFieldWrapper from '../general/SelectFieldWrapper';
+import InputWrapper from '../general/InputWrapper';
 
 // Data
 import templates from '../../data/templates';
@@ -42,14 +43,12 @@ class AddProcess1 extends Component {
 
 
   handleChange(event, index, value, id) {
-    console.log(id + ": " + value);
     if(id === 'template'){
       this.setState({currentTemplate: value});
       if(value === 'Custom'){
         this.setState({customize: true})
       }else{
         let templateObject = find(templates, {'name':value});
-        console.log('template',templateObject);
         this.setState({templateDefined: {
           loadType: templateObject.defaultSettings.loadType,
           controlType: templateObject.defaultSettings.controlType,
@@ -57,10 +56,10 @@ class AddProcess1 extends Component {
         }});
       }
     }
+    this.props.onChange({value,id});
   }
 
   componentDidUpdate(){
-    console.log('componentDidUpdate', this);
   }
 
   handleToggle(){
@@ -86,6 +85,13 @@ class AddProcess1 extends Component {
       let controlMethodNames = setupSettings.controlMethods.map((controlMethod) => {return controlMethod.name});
     return(
       <div className="select-boxes" style={styles.templateSelect}>
+        <InputWrapper>
+          <TextField
+            hintText='Make your name memorable'
+            floatingLabelText="Name"
+            fullWidth={true}
+          />
+        </InputWrapper>
         <SelectFieldWrapper
           id="template"
           floatingLabelText="Template"
@@ -135,7 +141,7 @@ class AddProcess1 extends Component {
           handleChange={this.handleChange}
         />
         <SelectFieldWrapper
-          id="controlMethod`"
+          id="controlMethod"
           floatingLabelText="Control Method"
           values={controlMethodNames}
           texts={controlMethodNames}
@@ -149,7 +155,7 @@ class AddProcess1 extends Component {
 }
 
 AddProcess1.propTypes = {
-
+  onChange: React.PropTypes.func,
 }
 
 AddProcess1.defaultProps = {

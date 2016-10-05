@@ -48,6 +48,8 @@ class SelectFieldWrapper extends Component {
         value={this.state.value}
         onChange={this.handleChange}
         disabled={this.props.disabled}
+        className={this.props.className}
+        style={this.props.style}
       >
         {menuItems}
       </SelectField>
@@ -60,13 +62,14 @@ SelectFieldWrapper.propTypes = {
   values: React.PropTypes.array.isRequired,
   texts: React.PropTypes.array.isRequired,
   initialValue: React.PropTypes.string,
-  id: React.PropTypes.string.isRequired,
+  id: React.PropTypes.string,
   disable: React.PropTypes.bool,
   handleChange: React.PropTypes.func,
 }
 
 SelectFieldWrapper.defaultProps = {
-  floatingLabelText: '',
+  floatingLabelText: ' ',
+  id: 'default',
 }
 
 export default SelectFieldWrapper;
