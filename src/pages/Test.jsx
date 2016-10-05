@@ -16,16 +16,6 @@ const Test = (props) => {
   return (
     <StepperWrapper
       linear={false}
-      content={[
-        <AddProcess1 />,
-      ]}
-      labels={[
-        'step 1',
-        'step 1',
-        'step 1',
-        'step 1',
-        'step 1',
-      ]}
       finish={'Add Process'}
       onFinish={() => {console.log('finished!')}}
     >
@@ -35,6 +25,14 @@ const Test = (props) => {
         </StepLabel>
         <StepContent>
           test content 1
+        </StepContent>
+      </Step>
+      <Step>
+        <StepLabel>
+          test label 2
+        </StepLabel>
+        <StepContent>
+          test content 2
         </StepContent>
       </Step>
     </StepperWrapper>
