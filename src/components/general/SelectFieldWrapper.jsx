@@ -27,7 +27,7 @@ class SelectFieldWrapper extends Component {
 
   handleChange(event, index, value) {
     if(this.props.handleChange){
-      this.props.handleChange(event,index,value,this.props.id);
+      this.props.handleChange(event,value,this.props.id);
     }
     this.setState({value: value});
   }

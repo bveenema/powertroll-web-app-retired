@@ -85,7 +85,7 @@ class AddProcess extends Component {
   getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
-        return (<AddProcess1 onChange={this.handleStepData}/>);
+        return (<AddProcess1 initalValues={this.processInfo} onChange={this.handleStepData}/>);
       case 1:
         return (<AddProcess2 />);
       default:

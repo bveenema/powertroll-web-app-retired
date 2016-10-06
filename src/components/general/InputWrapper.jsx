@@ -8,25 +8,32 @@ class InputWrapper extends Component {
     this.state = {
       value: this.props.initialValue,
     }
+    this.modifiedChildren = [];
     this.handleChange = this.handleChange.bind(this);
+    this.renderChildProps = this.renderChildProps.bind(this);
   }
 
-  componentWillMount(){
-    React.Children.forEach(this.props.children,)
+  renderChildProps(props){
+    return React.Children.map(props.children, child => {
+      if(child.type.name === "TextField"){
+        return React.cloneElement(child, {onChange: this.handleChange, value: this.state.value})
+      }else{
+        return child;
+      }
+    });
   }
 
-  handleChange(event, index, value) {
-    console.log('index', index);
-    if(this.props.handleChange){
-      this.props.handleChange(event,index,value,this.props.id);
+  handleChange(event, value) {
+    if(this.props.onChange){
+      this.props.onChange(event,value,this.props.id);
     }
     this.setState({value: value});
   }
 
   render(){
     return(
-      <div>
-        {this.props.children}
+      <div style={{width: '100%'}}>
+        {this.renderChildProps(this.props)}
       </div>
     );
   };
@@ -35,6 +42,7 @@ class InputWrapper extends Component {
 InputWrapper.propTypes = {
   onChange: React.PropTypes.func,
   id: React.PropTypes.string,
+  initialValue: React.PropTypes.string,
 }
 
 export default InputWrapper;
