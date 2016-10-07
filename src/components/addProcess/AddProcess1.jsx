@@ -4,11 +4,11 @@ import {find} from 'lodash';
 
 // Material-UI Components
 import TextField from 'material-ui/TextField';
-import Toggle from 'material-ui/Toggle';
 
 // Components
 import SelectFieldWrapper from '../general/SelectFieldWrapper';
 import InputWrapper from '../general/InputWrapper';
+import ToggleContainer from '../../containers/ToggleContainer';
 
 // Data
 import templates from '../../data/templates';
@@ -131,13 +131,7 @@ class AddProcess1 extends Component {
           texts={sensorNames}
           handleChange={this.handleChange}
         />
-        <Toggle
-          className="pure-u-1-3"
-          label="Customize"
-          labelPosition="right"
-          toggled={this.state.customize}
-          onToggle={this.handleToggle}
-        />
+        <ToggleContainer />
 
 
         <SelectFieldWrapper
