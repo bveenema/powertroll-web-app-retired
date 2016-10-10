@@ -4,7 +4,7 @@ import { addProcessField } from '../actions';
 import AddProcess1 from '../components/addProcess/AddProcess1';
 
 const mapStateToProps = (state) => {
-  debugger;
+  console.log('test')
   return {
     initialValues: state.processField.Form1
   }
